@@ -306,7 +306,8 @@
             btn.disabled = true;
             btn.textContent = 'Отправка...';
             
-            const scriptUrl = 'https://script.google.com/macros/s/AKfycbxpELikJ_MaGisD9Zlq6JZQ2ywTvkiYpQFMfXghWyr3SqJ0VELA0AakDtlm-NmLOKNrhw/exec';
+            // НОВАЯ ССЫЛКА НА СКРИПТ
+            const scriptUrl = 'https://script.google.com/macros/s/AKfycbyTA1v3rfJb50DuQWuAHOs0sE3wm4440mLPDNj5ssiXYb-w7Ndc-5NXoWaX7cOaxLo4lw/exec';
             const formData = new FormData(this);
             
             fetch(scriptUrl, { method: 'POST', body: formData })
