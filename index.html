@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Dragon PC Club - Видное</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Russo+One&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #ffffff;
+            line-height: 1.6;
+            background: radial-gradient(circle at top, #4a0000 0%, #1a0000 40%, #000000 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        a { text-decoration: none; color: inherit; }
+        html { scroll-behavior: smooth; }
+
+        /* --- МЕНЮ (Адаптивное) --- */
+        nav {
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid #ff0000;
+            padding: 15px 10px;
+            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+        nav a {
+            color: #fff;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            transition: 0.3s;
+            padding: 5px 10px;
+        }
+        nav a:hover { color: #ff0000; text-shadow: 0 0 10px #ff0000; }
+
+        /* --- АНИМАЦИИ --- */
+        @keyframes dragonFlyIn {
+            0% { transform: translateY(-100px) scale(0.5); opacity: 0; filter: blur(10px); }
+            100% { transform: translateY(0) scale(1); opacity: 1; filter: blur(0); }
+        }
+        @keyframes fireGlow {
+            0% { text-shadow: 0 0 10px #ff0000, 0 0 20px #ff4500; }
+            50% { text-shadow: 0 0 30px #ff0000, 0 0 60px #ff4500, 0 0 80px #ff8c00; }
+            100% { text-shadow: 0 0 10px #ff0000, 0 0 20px #ff4500; }
+        }
+        
+        .btn-click { transition: transform 0.1s, box-shadow 0.3s; }
+        .btn-click:active { transform: scale(0.92) !important; box-shadow: 0 0 10px rgba(255,0,0,0.5) !important; }
+
+        header {
+            text-align: center;
+            padding: 40px 15px 30px;
+            position: relative;
+        }
+
+        .dragon-img {
+            max-width: 250px;
+            width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+            animation: dragonFlyIn 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+            filter: drop-shadow(0 0 20px rgba(255,0,0,0.8));
+        }
+
+        header h1 {
+            font-family: 'Russo One', sans-serif;
+            font-size: 2.5rem;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: fireGlow 3s infinite alternate;
+            margin-top: 10px;
+        }
+
+        .address-box { margin-top: 15px; font-size: 1rem; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 10px;}
+        .address { color: #ff4500; background: rgba(0,0,0,0.6); display: inline-block; padding: 8px 15px; border-radius: 50px; border: 1px solid #ff0000; }
+        .work-time { color: #fff; background: rgba(0,0,0,0.6); display: inline-block; padding: 8px 15px; border-radius: 50px; border: 1px solid #00ff88; }
+        .work-time span { color: #00ff88; font-weight: 800; }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 15px; }
+
+        .section-title {
+            font-family: 'Russo One', sans-serif;
+            font-size: 1.8rem;
+            text-align: center;
+            margin: 40px 0 25px;
+            color: #fff;
+            text-transform: uppercase;
+            text-shadow: 0 0 15px rgba(255,0,0,1);
+        }
+
+        /* --- КАРТОЧКИ --- */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .service-card {
+            background: linear-gradient(145deg, #2a0000, #0f0000);
+            border: 2px solid #4a0000;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .service-card:hover { border-color: #ff0000; box-shadow: 0 0 25px rgba(255,0,0,0.5); transform: translateY(-5px); }
+        .service-card h3 { font-family: 'Russo One', sans-serif; font-size: 1.4rem; color: #ff0000; margin-bottom: 15px; text-transform: uppercase; }
+        .service-card p { color: #ccc; margin-bottom: 20px; font-size: 0.95rem; }
+        .price-tag { font-size: 1.6rem; color: #00ff88; font-weight: 800; display: block; margin-bottom: 20px; text-shadow: 0 0 10px rgba(0,255,136,0.4); }
+        
+        .call-btn {
+            display: inline-block; padding: 12px 25px; background: transparent; color: #fff; border: 2px solid #ff0000; border-radius: 50px; font-weight: 700; text-transform: uppercase; font-size: 0.85rem; cursor: pointer;
+        }
+        .call-btn:hover { background: #ff0000; box-shadow: 0 0 15px rgba(255,0,0,0.8); }
+
+        .main-call-btn {
+            display: inline-block; margin-top: 20px; padding: 15px 35px; background: #ff0000; color: #fff; border-radius: 50px; font-family: 'Russo One', sans-serif; font-size: 1.1rem; text-transform: uppercase; box-shadow: 0 0 20px rgba(255,0,0,0.8); border: 2px solid transparent;
+        }
+        .main-call-btn:hover { background: transparent; border-color: #ff0000; box-shadow: 0 0 40px rgba(255,0,0,1); transform: scale(1.05); }
+
+        /* --- ХАРАКТЕРИСТИКИ --- */
+        .specs-list { list-style: none; text-align: left; color: #ccc; font-size: 0.95rem; }
+        .specs-list li { margin-bottom: 10px; border-bottom: 1px dashed #4a0000; padding-bottom: 5px; }
+        .specs-list li strong { color: #fff; }
+
+        /* --- КОНТАКТЫ --- */
+        .contact-info {
+            background: linear-gradient(145deg, #2a0000, #0f0000);
+            border: 2px solid #ff0000;
+            border-radius: 15px;
+            padding: 25px;
+            max-width: 700px;
+            margin: 0 auto 50px;
+            box-shadow: 0 0 30px rgba(255,0,0,0.3);
+        }
+        .contact-info p { font-size: 1rem; margin-bottom: 10px; border-bottom: 1px solid #4a0000; padding-bottom: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 5px;}
+        .contact-info p strong { color: #ff4500; }
+        .contact-info p span { color: #fff; font-weight: 600; }
+        .admin-name { color: #00ff88 !important; font-weight: 800; }
+
+        /* --- ФОРМА --- */
+        .form-container { background: rgba(30, 0, 0, 0.9); padding: 25px; border-radius: 15px; border: 2px solid #ff0000; box-shadow: 0 0 30px rgba(255,0,0,0.5); max-width: 600px; margin: 0 auto 60px; }
+        form { display: flex; flex-direction: column; gap: 15px; }
+        input, select { width: 100%; padding: 15px; background: #000; border: 1px solid #4a0000; border-radius: 5px; color: #fff; font-size: 1rem; font-family: inherit; }
+        input:focus, select:focus { outline: none; border-color: #ff0000; box-shadow: 0 0 10px rgba(255,0,0,0.8); }
+        .submit-btn { padding: 18px; background: #ff0000; color: #fff; border: none; border-radius: 5px; font-family: 'Russo One', sans-serif; font-size: 1.1rem; cursor: pointer; }
+        .submit-btn:hover { background: #cc0000; box-shadow: 0 0 20px rgba(255,0,0,1); }
+        
+        #status { text-align: center; margin-top: 20px; font-weight: 800; color: #00ff88; }
+
+        footer { text-align: center; padding: 20px; color: #888; border-top: 2px solid #4a0000; font-size: 0.85rem; background: #000; }
+    </style>
+</head>
+<body>
+
+    <!-- МЕНЮ -->
+    <nav>
+        <a href="#tariffs">Услуги</a>
+        <a href="#specs">Характеристики</a>
+        <a href="#booking">Бронирование</a>
+        <a href="#contacts">Админы</a>
+    </nav>
+
+    <header>
+        <img src="dragon" alt="Red Dragon" class="dragon-img">
+        <h1>RED DRAGON</h1>
+        <div class="address-box">
+            <div class="address">📍 г. Видное, Центральная улица, 2</div>
+            <div class="work-time">⏰ Работаем: <span>с 10:00 до 22:00</span></div>
+        </div>
+        <a href="tel:+79032276637" class="main-call-btn btn-click">📞 Позвонить и забронировать</a>
+    </header>
+
+    <div class="container">
+        
+        <!-- УСЛУГИ -->
+        <div id="tariffs" class="section-title">Наши услуги</div>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Стандарт ПК</h3>
+                <p>Мощные компьютеры для любых игр.</p>
+                <span class="price-tag">от 150 ₽ / час</span>
+                <a href="tel:+79032276637" class="call-btn btn-click">Узнать по телефону</a>
+            </div>
+            <div class="service-card">
+                <h3>VIP Зона</h3>
+                <p>Максимальная производительность и комфорт.</p>
+                <span class="price-tag">от 190 ₽ / час</span>
+                <a href="tel:+79032276637" class="call-btn btn-click">Узнать по телефону</a>
+            </div>
+            <div class="service-card">
+                <h3>PlayStation 5</h3>
+                <p>4K экран, 2 геймпада, топовые игры.</p>
+                <span class="price-tag">от 300 ₽ / час</span>
+                <a href="tel:+79032276637" class="call-btn btn-click">Узнать по телефону</a>
+            </div>
+            <div class="service-card">
+                <h3>Кальян</h3>
+                <p>Классические и премиальные вкусы.</p>
+                <span class="price-tag">от 800 ₽</span>
+                <a href="tel:+79032276637" class="call-btn btn-click">Узнать по телефону</a>
+            </div>
+            <div class="service-card">
+                <h3>Напитки</h3>
+                <p>Энергетики, кола, кофе.</p>
+                <span class="price-tag">от 80 ₽</span>
+                <a href="tel:+79032276637" class="call-btn btn-click">Узнать по телефону</a>
+            </div>
+        </div>
+
+        <!-- ХАРАКТЕРИСТИКИ -->
+        <div id="specs" class="section-title">Характеристики ПК</div>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Стандарт</h3>
+                <ul class="specs-list">
+                    <li><strong>Видеокарта:</strong> RTX 3060</li>
+                    <li><strong>Процессор:</strong> Intel Core i5</li>
+                    <li><strong>Монитор:</strong> 165Hz, 24"</li>
+                    <li><strong>Периферия:</strong> Игровая мышь и наушники</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <h3>VIP</h3>
+                <ul class="specs-list">
+                    <li><strong>Видеокарта:</strong> RTX 4080</li>
+                    <li><strong>Процессор:</strong> Intel Core i9</li>
+                    <li><strong>Монитор:</strong> 240Hz, 27"</li>
+                    <li><strong>Периферия:</strong> Премиум мышь, клавиатура, наушники</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ФОРМА -->
+        <div id="booking" class="section-title">Бронирование</div>
+        <div class="form-container">
+            <form id="bookingForm">
+                <input type="text" name="name" placeholder="Ваше имя" required>
+                <input type="tel" name="phone" placeholder="Ваш телефон" required>
+                <select name="zone" required>
+                    <option value="" disabled selected>Что бронируем?</option>
+                    <option value="Стандарт">Стандарт (ПК)</option>
+                    <option value="VIP">VIP (ПК)</option>
+                    <option value="PlayStation 5">PlayStation 5</option>
+                    <option value="Кальян">Кальян</option>
+                </select>
+                <select name="time" required>
+                    <option value="" disabled selected>Время (с 10 до 22)</option>
+                    <option value="10:00">10:00</option>
+                    <option value="11:00">11:00</option>
+                    <option value="12:00">12:00</option>
+                    <option value="13:00">13:00</option>
+                    <option value="14:00">14:00</option>
+                    <option value="15:00">15:00</option>
+                    <option value="16:00">16:00</option>
+                    <option value="17:00">17:00</option>
+                    <option value="18:00">18:00</option>
+                    <option value="19:00">19:00</option>
+                    <option value="20:00">20:00</option>
+                    <option value="21:00">21:00</option>
+                    <option value="22:00">22:00</option>
+                </select>
+                <button type="submit" id="submitBtn" class="submit-btn btn-click">Отправить заявку</button>
+            </form>
+            <p id="status"></p>
+        </div>
+
+        <!-- КОНТАКТЫ -->
+        <div id="contacts" class="section-title">Контакты</div>
+        <div class="contact-info">
+            <p><strong>Адрес:</strong> <span>г. Видное, Центральная улица, 2</span></p>
+            <p><strong>Телефон:</strong> <span>+7 903 227 6637</span></p>
+            <p><strong>Режим работы:</strong> <span>10:00 - 22:00</span></p>
+            <br>
+            <p style="border-bottom: none; margin-bottom: 5px;"><strong>Владелец:</strong> <span class="admin-name">Азиз</span></p>
+            <p style="border-bottom: none; margin-bottom: 5px;"><strong>Смена 5/2:</strong> <span class="admin-name">Мехди</span></p>
+            <p style="border-bottom: none; margin-bottom: 5px;"><strong>Смена 2/5:</strong> <span class="admin-name">Давид</span></p>
+            <br>
+            <div style="text-align: center;">
+                <a href="tel:+79032276637" class="main-call-btn btn-click" style="padding: 12px 25px; font-size: 0.95rem;">Позвонить сейчас</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        &copy; 2026 Red Dragon PC Club. Все права защищены.
+    </footer>
+
+    <script>
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault(); 
+            
+            const btn = document.getElementById('submitBtn');
+            const status = document.getElementById('status');
+            
+            btn.disabled = true;
+            btn.textContent = 'Отправка...';
+            
+            const scriptUrl = 'https://script.google.com/macros/s/AKfycbxpELikJ_MaGisD9Zlq6JZQ2ywTvkiYpQFMfXghWyr3SqJ0VELA0AakDtlm-NmLOKNrhw/exec';
+            const formData = new FormData(this);
+            
+            fetch(scriptUrl, { method: 'POST', body: formData })
+            .then(response => {
+                status.textContent = '✅ Заявка отправлена!';
+                document.getElementById('bookingForm').reset();
+                btn.disabled = false;
+                btn.textContent = 'Отправить заявку';
+            })
+            .catch(error => {
+                status.textContent = '❌ Ошибка. Позвоните нам.';
+                status.style.color = '#ff0000';
+                btn.disabled = false;
+                btn.textContent = 'Отправить заявку';
+            });
+        });
+    </script>
+</body>
+</html>
