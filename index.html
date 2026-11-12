@@ -254,7 +254,7 @@ footer{text-align:center;color:#887;font-size:.78rem;margin-top:40px;padding:0 2
 
 <!-- ГЛАВНАЯ -->
 <header class="hero">
-<div class="stagewrap"><div class="aura"></div><img src="img/dragon3d.png" class="drg" alt="Red Dragon"><div id="embers"></div></div>
+<div class="stagewrap"><div class="aura"></div><img src="dragon3d.png" class="drg" alt="Red Dragon"><div id="embers"></div></div>
 <h1 class="sr">RED DRAGON</h1><div class="sub">PC CLUB · ВИДНОЕ</div>
 <div class="chips"><div class="chip">г. Видное, квартал Центральный, 2</div><div class="chip g">Работаем: <b>Круглосуточно 24/7</b></div></div>
 <div class="cta"><button class="btn" data-open="booking">Забронировать</button><a href="tel:+79032276637" class="btn gh">Позвонить</a></div>
@@ -268,7 +268,8 @@ footer{text-align:center;color:#887;font-size:.78rem;margin-top:40px;padding:0 2
 <script>
 const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
 
-$('#gal').innerHTML=[1,2,3].map(i=>`<img alt="Фото клуба ${i}" src="photos/${i}.jpg">`).join('');
+// Фото клуба (пока заглушки, потом загрузишь свои)
+$('#gal').innerHTML=[1,2,3].map(i=>`<img alt="Фото клуба ${i}" src="https://via.placeholder.com/400x300/14000a/ff2a2a?text=Фото+${i}">`).join('');
 const dots=$('#dots'),menu=$('#menu');
 const IC=['<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>','<rect x="2" y="7" width="20" height="11" rx="5"/><path d="M7 10v5M4.5 12.5h5M16 11h.01M18 14h.01"/>','<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1"/>','<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>','<rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/>','<path d="M12 22s7-6.5 7-12a7 7 0 0 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/>','<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/>'];
 $$('.tile em').forEach((e,i)=>e.innerHTML='<svg viewBox="0 0 24 24">'+IC[i]+'</svg>');
@@ -294,10 +295,10 @@ $('#rail').innerHTML=PCS.map((p,i)=>`<div class="pcard"><div class="stage"><div 
 PCS.forEach((p,i)=>{const sc=$('#sc'+i);if(p.ps){sc.append(box(40,120,100,'con',0,-5,0),box(46,8,24,'pad',0,64,70))}else{sc.append(box(150,88,6,'scr',-35,-22,0),box(10,30,6,'',-35,36,-4),box(54,4,28,'',-35,52,0),box(52,112,100,'tw',72,0,-5))}});
 $$('.pcard [data-open]').forEach(b=>b.onclick=()=>openP('booking'));
 const SH=[
-{n:'Adrenaline Rush',d:'Энергетик 0,5 л',p:130,k:'can',c:'#1b4dff,#06133f',l:'ADRENALINE',img:'img/adrenaline.jpg'},
-{n:'Burn',d:'Энергетик 0,5 л',p:130,k:'can',c:'#e10000,#2a0000',l:'BURN',img:'img/burn.jpg'},
-{n:'Flash Up',d:'Энергетик 0,5 л',p:100,k:'can',c:'#ff8a00,#3a1500',l:'FLASH',img:'img/flash.jpg'},
-{n:'Кальян',d:'Классика и премиум',p:800,k:'hk',photo:'img/hookah.jpg'},
+{n:'Adrenaline Rush',d:'Энергетик 0,5 л',p:130,k:'can',c:'#1b4dff,#06133f',l:'ADRENALINE',img:'adrenaline.jpg'},
+{n:'Burn',d:'Энергетик 0,5 л',p:130,k:'can',c:'#e10000,#2a0000',l:'BURN',img:'burn.jpg'},
+{n:'Flash Up',d:'Энергетик 0,5 л',p:100,k:'can',c:'#ff8a00,#3a1500',l:'FLASH',img:'flash.jpg'},
+{n:'Кальян',d:'Классика и премиум',p:800,k:'hk',photo:'hookah.jpg'},
 {n:'Lit Energy',d:'Чипсы',p:120,k:'bag'}];
 function lid(r,y,bg){const d=document.createElement('div');d.className='lid';d.style.cssText=`width:${2*r}px;height:${2*r}px;left:${-r}px;top:${-r}px;background:${bg};transform:translateY(${y}px) rotateX(90deg)`;return d}
 function can(src){const r=18,h=90,n=16,a=r*Math.cos(Math.PI/n),w=2*r*Math.tan(Math.PI/n)+1,g=document.createElement('div');g.className='cy';
@@ -323,7 +324,7 @@ function ageWarn(){const c=$('#cart'),k=$('.agechk');c.textContent='Подтве
 $('#ord').onclick=()=>{if(total()&&!$('#age18').checked){ageWarn();return}openP('booking')};
 
 const GM=['CS2','Dota 2','GTA V','Valorant','EA FC 25','Fortnite','Minecraft','PUBG','Apex Legends'];
-const GI=['games/cs2.jpg','games/dota2.jpg','games/gtav.jpg','games/valorant.jpg','games/eafc25.jpg','games/fortnite.jpg','games/minecraft.jpg','games/pubg.jpg','games/apexlegends.jpg'];
+const GI=['cs2.JPG','dota2.jpg','gtav.jpg','valorant.jpg','eafc25.JPG','fortnite.jpg','minecraft.JPG','pubg.jpg','apexlegends.JPG'];
 $('#p-games .pb').innerHTML='<div class="gh"><h3>ИГРЫ</h3><p>Выбирай игру и погружайся в мир гейминга</p></div><div class="g3">'+GM.map((g,i)=>`<div class="gk" style="--i:${i}"><div class="gp"><img alt="${g}" src="${GI[i]}"></div><b>${g}</b></div>`).join('')+'</div>';
 
 const SCRIPT='https://script.google.com/macros/s/AKfycbyBYdScI9sPt8VZ3qNjiVHMhEKjM5hHwcRXbc5JIzoyfqXI3CXy883GTCY5VMx1wrBk1w/exec';
